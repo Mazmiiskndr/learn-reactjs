@@ -1,3 +1,15 @@
+.animal-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    list-style: none;
+}
+
+.animal-item {
+    margin: 20px;
+    position: relative;
+}
+
 .card {
     width: 200px;
     height: 200px;
@@ -5,7 +17,6 @@
     position: relative;
     border-radius: 10px;
     border: 2px solid #ccc;
-    /* Menambahkan border */
     box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
@@ -13,7 +24,6 @@
 .card:hover {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
     border-color: #999;
-    /* Mengubah warna border saat di-hover */
 }
 
 .animal-image {
@@ -23,5 +33,13 @@
 }
 
 .card:hover .animal-image {
-    transform: scale(1.2);
+    transform: scale(1.1);
+}
+
+.heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
 }

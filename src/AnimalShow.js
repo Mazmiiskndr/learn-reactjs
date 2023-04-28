@@ -1,70 +1,52 @@
-import React from "react";
+// Import necessary React hooks and components
+import React, { useState } from "react";
 import heartSvg from "./svgs/heart.svg";
 import "./AnimalShow.css";
 
-class AnimalShow extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      heartPercentage: {},
-    };
-  }
+// Create AnimalShow functional component that takes animals as a prop
+const AnimalShow = ({ animals }) => {
+  // Set up state for heartPercentage using useState hook
+  const [heartPercentage, setHeartPercentage] = useState({});
 
-  handleAnimalClick = (index) => {
-    const { heartPercentage } = this.state;
+  // Define a function to handle animal click
+  const handleAnimalClick = (index) => {
+    // Get the current percentage for the clicked animal or use 0 if undefined
     const currentPercentage = heartPercentage[index] || 0;
-    this.setState({
-      heartPercentage: {
-        ...heartPercentage,
-        [index]: currentPercentage + 10,
-      },
+    // Update the state of heartPercentage for the clicked animal
+    setHeartPercentage({
+      ...heartPercentage,
+      [index]: currentPercentage + 10,
     });
   };
 
-  render() {
-    const { animals } = this.props;
-    const { heartPercentage } = this.state;
-
-    return (
-      <div>
-        <h1>Animal Show</h1>
-        <ul
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            padding: 0,
-            listStyle: "none",
-          }}
-        >
-          {animals.map((animal, index) => (
-            <li key={index} style={{ margin: "20px", position: "relative" }}>
-              <div className="card">
-                <img
-                  className="animal-image"
-                  src={animal.src}
-                  alt={animal.name}
-                  onClick={() => this.handleAnimalClick(index)}
-                />
-                <img
-                  src={heartSvg}
-                  alt="heart"
-                  style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    width: `${heartPercentage[index] || 0}%`,
-                    height: `${heartPercentage[index] || 0}%`,
-                    zIndex: 1,
-                  }}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
+  // Render AnimalShow component
+  return (
+    <div>
+      <h1>Animal Show</h1>
+      <ul className="animal-list">
+        {animals.map((animal, index) => (
+          <li key={index} className="animal-item">
+            <div className="card" onClick={() => handleAnimalClick(index)}>
+              <img
+                className="animal-image"
+                src={animal.src}
+                alt={animal.name}
+              />
+              <img
+                src={heartSvg}
+                alt="heart"
+                className="heart"
+                style={{
+                  width: `${heartPercentage[index] || 0}%`,
+                  height: `${heartPercentage[index] || 0}%`,
+                }}
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default AnimalShow;

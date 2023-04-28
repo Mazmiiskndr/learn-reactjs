@@ -56,9 +56,10 @@
 //     </div>
 //   );
 // }
+// Import React hooks and AnimalShow component
 import React, { useState } from "react";
 import AnimalShow from "./AnimalShow";
-// Impor gambar SVG dari folder svgs
+// Import animal SVG images
 import birdSvg from "./svgs/bird.svg";
 import catSvg from "./svgs/cat.svg";
 import cowSvg from "./svgs/cow.svg";
@@ -66,44 +67,38 @@ import dogSvg from "./svgs/dog.svg";
 import gatorSvg from "./svgs/gator.svg";
 import horseSvg from "./svgs/horse.svg";
 
-const getAnimalImageUrl = (animal) => {
-  // Menggantikan gambar dengan gambar SVG yang sesuai
-  switch (animal) {
-    case "bird":
-      return birdSvg;
-    case "cat":
-      return catSvg;
-    case "cow":
-      return cowSvg;
-    case "dog":
-      return dogSvg;
-    case "gator":
-      return gatorSvg;
-    case "horse":
-      return horseSvg;
-    default:
-      return "";
-  }
+// Map animal names to their respective SVG images
+const animalMap = {
+  birdSvg,
+  catSvg,
+  cowSvg,
+  dogSvg,
+  gatorSvg,
+  horseSvg,
 };
 
+// Function to get a random animal name
 const getRandomAnimal = () => {
-  const animals = ["bird", "cat", "cow", "dog", "gator", "horse"];
-
+  const animals = Object.keys(animalMap);
   return animals[Math.floor(Math.random() * animals.length)];
 };
 
+// Create App functional component
 function App() {
-  // State management
-  const [animals, setAnimal] = useState([]);
+  // Set up state for animals array using useState hook
+  const [animals, setAnimals] = useState([]);
 
+  // Define a function to handle Add Animal button click
   const handleClick = () => {
-    const newAnimal = {
-      name: getRandomAnimal(),
-      src: getAnimalImageUrl(getRandomAnimal()),
-    };
-    setAnimal([...animals, newAnimal]);
+    const newAnimalName = getRandomAnimal();
+    // Add a new animal object to the animals array with its name and image source
+    setAnimals([
+      ...animals,
+      { name: newAnimalName, src: animalMap[newAnimalName] },
+    ]);
   };
 
+  // Render App component
   return (
     <div>
       <button onClick={handleClick}>Add Animal</button>
@@ -113,4 +108,3 @@ function App() {
 }
 
 export default App;
-
