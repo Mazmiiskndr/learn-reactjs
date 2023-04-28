@@ -1,0 +1,27 @@
+.card {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    /* Menambahkan border */
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    border-color: #999;
+    /* Mengubah warna border saat di-hover */
+}
+
+.animal-image {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover .animal-image {
+    transform: scale(1.2);
+}
